@@ -34,37 +34,37 @@ jobs:
   #   - name: View the output
   #     run: cat /tmp/semgrep.json
   
-  SonarQube-free:
-    name: SonarQube-free
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-    - name: permmissions
-      run: chmod -R a+r .
-    - uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FREE }}
-        SONAR_HOST_URL: https://sq.accuknox.com
-      with:
-        args: >
-          -Dsonar.projectKey=juice-shop-2
-
-  # SonarQube-Paid:
-  #   name: SonarQube-Paid
+  # SonarQube-free:
+  #   name: SonarQube-free
   #   runs-on: ubuntu-latest
   #   steps:
   #   - uses: actions/checkout@v4
   #     with:
   #       fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+  #   - name: permmissions
+  #     run: chmod -R a+r .
   #   - uses: sonarsource/sonarqube-scan-action@master
   #     env:
-  #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_PAID }}
-  #       SONAR_HOST_URL: http://139.59.43.202:9000
+  #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FREE }}
+  #       SONAR_HOST_URL: https://sq.accuknox.com
   #     with:
   #       args: >
-  #         -Dsonar.projectKey=test
+  #         -Dsonar.projectKey=juice-shop-2
+
+  SonarQube-Paid:
+    name: SonarQube-Paid
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+    - uses: sonarsource/sonarqube-scan-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_PAID }}
+        SONAR_HOST_URL: http://139.59.43.202:9000
+      with:
+        args: >
+          -Dsonar.projectKey=juice-shop-2
 
   # Checkmarx:
   #   name: Checkmarx
